@@ -24,6 +24,8 @@ IN THE SOFTWARE.
 import pywikibot
 from pywikibot.pagegenerators import ReferringPageGenerator
 import robot
+import traceback
+
 import index_help
 
 """
@@ -55,7 +57,10 @@ class IndexBot(robot.Robot):
             pages = ReferringPageGenerator(self.template, onlyTemplateInclusion=True, content=True)
         for page in pages:
             print('Processing %s' % page.title())
-            self.do_page(page)
+            try:
+                self.do_page(page)
+            except:
+                traceback.print_exc()
 
     def do_page(self, page):
         info = index_help.parse_instructions(page)
