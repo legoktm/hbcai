@@ -64,7 +64,7 @@ def parse_instructions(page):
             elif target.startswith('./'):
                 target = page.title() + target[1:]
             info['target'] = target
-        elif param.startswith('mask='):
+        elif re.search('^mask[0-9]*=', param):
             mask = clean(param[5:])
             if mask.startswith('/'):
                 mask = page.title() + mask
